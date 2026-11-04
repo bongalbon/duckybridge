@@ -1,6 +1,7 @@
 .tools/
 target/
 artifacts/
+dist/
 .gradle/
 **/build/
 local.properties

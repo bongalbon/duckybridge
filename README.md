@@ -6,6 +6,27 @@ Application Android personnelle et agent natif pour exécuter des diagnostics au
 
 ## Premier parcours
 
+### Compilation simplifiée sous Windows
+
+Depuis PowerShell, lancer les trois scripts dans cet ordre :
+
+```powershell
+cd C:\apps_ctd\duckybridge
+.\scripts\install-dependencies.ps1
+.\scripts\build-apk.ps1
+.\scripts\build-agent.ps1
+```
+
+Arrêter si un script signale une erreur. Après compilation réussie, les fichiers sont disponibles dans `dist` :
+
+- `duckybrige.apk` : application Android de développement ;
+- `agent_duckybridge_x64.exe` : agent Windows x64 ;
+- une somme SHA-256 à côté de chaque livrable.
+
+Le nom `duckybrige.apk` reprend exactement le nom demandé. Les tests sont activés par défaut. L'installation peut demander une confirmation Windows et nécessite Internet ; aucun agent n'est lancé et aucun pare-feu ou démarrage automatique n'est configuré. Voir le [guide des scripts Windows](docs/installation/WINDOWS-SCRIPTS.md).
+
+### Compilation et configuration manuelles
+
 ```sh
 cargo build --release
 target/release/duckybridge-agent init --name "Mon PC" --cwd .

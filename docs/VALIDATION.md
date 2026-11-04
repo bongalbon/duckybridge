@@ -43,6 +43,12 @@ Sept tests Rust de sécurité/exécution : requête signée/rejeu, révocation s
 
 CI GitHub Actions fournie pour Windows, Ubuntu et macOS, compilation APK/tests/lint, audit Cargo et inventaire Android. Déclenchement manuel possible via `workflow_dispatch` après publication de la branche par le propriétaire. Les jobs de qualité Rust sont séparés des compilations pour rendre leurs résultats distincts. Aucune exécution GitHub distante lancée dans cette session. Analyse des dépendances non déclarée réussie.
 
+## Scripts Windows ajoutés
+
+Trois points d'entrée sont disponibles : `scripts/install-dependencies.ps1`, `scripts/build-apk.ps1`, `scripts/build-agent.ps1`. Les noms de distribution sont `dist/duckybrige.apk` et `dist/agent_duckybridge_x64.exe`, copiés seulement après réussite, avec sommes SHA-256. Voir le guide `docs/installation/WINDOWS-SCRIPTS.md`.
+
+Validation locale : analyse syntaxique PowerShell réussie ; exécution du contrôle des prérequis sous Windows PowerShell 5.1 réussie (code 1 attendu : Visual C++, SDK Windows et Rust manquants). Les fonctions de copie/nommage, de calcul des sommes et de rejet d'une sortie absente ont été vérifiées avec des fichiers factices dans `.tools`, ensuite supprimés. Les codes de sortie natifs 0 et 23 ont été testés pour vérifier l'arrêt sur erreur. Le script de compilation agent refuse correctement de continuer sans prérequis. Aucune installation de paquet, acceptation de licence ou compilation complète n'a été lancée pour tester ces scripts ; aucun nouveau livrable APK/EXE réel n'est annoncé.
+
 ## Critère d'acceptation
 
 **Non validé** tant que le parcours Android réel → agent natif sous compte utilisateur → commande autorisée → résultat → révocation n'a pas été observé. Utiliser `docs/roadmap/ACCEPTANCE.md`. Les fonctionnalités écrites mais non testées restent décrites comme telles dans `docs/FEATURES.md`.

@@ -1,0 +1,20 @@
+// Resolve actual JAR/AAR files; the standard "dependencies" report only resolves metadata.
+allprojects {
+    if (path == ':app') {
+        tasks.register('downloadBuildDependencies') {
+            doLast {
+                def wanted = [
+                    'debugCompileClasspath', 'debugRuntimeClasspath',
+                    'debugUnitTestCompileClasspath', 'debugUnitTestRuntimeClasspath',
+                    'kaptDebug', '_agp_internal_javaPreCompileDebug_kaptClasspath',
+                    'kotlinCompilerClasspath', 'kotlinCompilerPluginClasspathDebug',
+                    'kotlinKaptWorkerDependencies', 'lintClassPath', 'lintChecks'
+                ]
+                configurations.findAll { it.canBeResolved && wanted.contains(it.name) }.each { configuration ->
+                    println "Downloading ${project.path}:${configuration.name}"
+                    configuration.files
+                }
+            }
+        }
+    }
+}

@@ -79,11 +79,19 @@ pub fn fingerprint_pem(pem: &str) -> Result<String> {
 }
 
 pub fn init(store: &Store, name: &str, cwd: &Path) -> Result<()> {
+    anyhow::ensure!(
+        !name.trim().is_empty() && name.len() <= 80 && !name.chars().any(char::is_control),
+        "Nom de l'agent invalide"
+    );
     let _guard = store.lock()?;
     if store.0.join("config.json").exists() {
         bail!("Agent déjà initialisé");
     }
     let cwd = fs::canonicalize(cwd)?;
+    anyhow::ensure!(
+        cwd.is_dir(),
+        "Le répertoire de travail doit être un dossier"
+    );
     let rcgen::CertifiedKey { cert, key_pair } =
         rcgen::generate_simple_self_signed(vec!["duckybridge.local".into()])?;
     let id = hex::encode(Sha256::digest(cert.der()));

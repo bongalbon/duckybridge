@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "name": "Diagnostic de connexion",
+  "steps": [
+    {"command": "hostname"},
+    {"delay_ms": 300},
+    {"command": "whoami", "when_exit": 0}
+  ]
+}

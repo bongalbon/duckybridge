@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://duckybridge.local/schema/script-v1",
+  "title": "DuckyBridge Script v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "name", "steps"],
+  "properties": {
+    "version": {"const": 1},
+    "name": {"type": "string", "minLength": 1, "maxLength": 80},
+    "steps": {
+      "type": "array", "minItems": 1, "maxItems": 30,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "oneOf": [{"required": ["command"]}, {"required": ["delay_ms"]}],
+        "properties": {
+          "command": {"type": "string", "minLength": 1, "maxLength": 80},
+          "delay_ms": {"type": "integer", "minimum": 0, "maximum": 10000},
+          "when_exit": {"type": "integer"}
+        }
+      }
+    }
+  }
+}

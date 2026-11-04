@@ -1,0 +1,11 @@
+.tools/
+target/
+artifacts/
+.gradle/
+**/build/
+local.properties
+*.iml
+.idea/
+__pycache__/
+.duckybridge/
+*.log

@@ -14,7 +14,7 @@ directories = "6"
 fs2 = "0.4"
 futures-util = "0.3"
 hex = "0.4"
-jsonwebtoken = "9.3"
+jsonwebtoken = "11.1"
 mdns-sd = "0.13"
 p256 = { version = "0.13", features = ["pem"] }
 rcgen = "0.13"

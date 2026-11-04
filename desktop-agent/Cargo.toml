@@ -15,7 +15,7 @@ fs2 = "0.4"
 futures-util = "0.3"
 hex = "0.4"
 jsonwebtoken = "9.3"
-mdns-sd = "0.13"
+mdns-sd = "0.21"
 p256 = { version = "0.13", features = ["pem"] }
 rcgen = "0.13"
 rustls = { version = "0.23", default-features = false, features = ["std", "ring", "tls12"] }
